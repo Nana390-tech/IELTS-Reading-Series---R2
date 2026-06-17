@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Prep Reading Series – R2</title>
+<style>
+  :root{
+    --navy:#c0202e;        /* deep red */
+    --navy2:#8f1720;
+    --gold:#f4c430;        /* yellow */
+    --gold-soft:#fbe7a8;
+    --cream:#fdf6ec;
+    --card:#ffffff;
+    --ink:#2b1d1e;
+    --muted:#6a585a;
+    --green:#1f8a55;
+    --green-bg:#e7f6ee;
+    --red:#c0392b;
+    --red-bg:#fbeae8;
+    --line:#ece2d4;
+    --shadow:0 6px 22px rgba(192,32,46,.10);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.6;
+  }
+  header{
+    background:linear-gradient(135deg,var(--navy),var(--navy2));
+    color:#fff;padding:26px 20px 22px;text-align:center;position:relative;
+    border-bottom:4px solid var(--gold);
+  }
+  header h1{margin:0;font-size:1.55rem;letter-spacing:.3px}
+  header .sub{margin-top:6px;font-size:.95rem;color:var(--gold-soft)}
+  .wrap{max-width:1180px;margin:0 auto;padding:18px 16px 60px}
+
+  .scorebar{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:14px 18px;margin:18px 0;
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  }
+  .scorebar .left{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+  .stat{text-align:center;min-width:78px}
+  .stat .num{font-size:1.5rem;font-weight:800;color:var(--navy)}
+  .stat .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .band-chip{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;
+    border-radius:14px;padding:8px 20px;min-width:120px;box-shadow:var(--shadow);
+  }
+  .band-chip .big{font-size:2rem;font-weight:900;line-height:1}
+  .band-chip .cap{font-size:.7rem;letter-spacing:1px;text-transform:uppercase}
+  .btn{
+    border:none;cursor:pointer;border-radius:10px;font-weight:700;font-size:.9rem;
+    padding:10px 16px;transition:.15s;font-family:inherit;
+  }
+  .btn-gold{background:var(--gold);color:#6b4a00}
+  .btn-gold:hover{background:#e0ad1f}
+  .btn-ghost{background:#e7eeec;color:var(--navy)}
+  .btn-ghost:hover{background:#d9e4e1}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--navy2)}
+
+  .pills{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px}
+  .pill{
+    background:var(--card);border:1px solid var(--line);color:var(--navy);
+    padding:10px 18px;border-radius:999px;cursor:pointer;font-weight:700;font-size:.92rem;
+    box-shadow:0 2px 6px rgba(15,82,87,.05);transition:.15s;
+  }
+  .pill:hover{border-color:var(--gold)}
+  .pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .pill .done{display:inline-block;margin-left:7px;font-size:.78rem;color:var(--gold-soft)}
+  .pill.active .done{color:var(--gold-soft)}
+
+  .part{display:none}
+  .part.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+  .split{display:flex;gap:20px;align-items:flex-start}
+  .col-passage{flex:1 1 0;min-width:0}
+  .col-q{flex:1 1 0;min-width:0}
+  .passage{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:20px 22px;max-height:78vh;overflow-y:auto;position:sticky;top:14px;
+  }
+  .passage h2{color:var(--navy);margin:.2em 0 .5em;font-size:1.2rem}
+  .passage p{margin:.55em 0;font-size:.95rem}
+  .passage .lead{font-style:italic;color:var(--muted);font-size:.85rem}
+  .camp{border-left:3px solid var(--gold-soft);padding-left:12px;margin:.8em 0}
+  .camp b{color:var(--navy)}
+
+  .qcard{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;
+  }
+  .qcard .qhead{color:var(--navy);font-weight:800;font-size:1.05rem;margin:0 0 4px}
+  .qcard .qinstr{color:var(--muted);font-size:.86rem;margin:0 0 14px;border-left:3px solid var(--gold);padding-left:10px}
+  .legend{background:#f1f6f4;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:.85rem}
+  .legend b{color:var(--navy)}
+  .q{padding:11px 0;border-top:1px dashed var(--line)}
+  .q:first-of-type{border-top:none}
+  .q .stem{font-size:.94rem;margin-bottom:8px;display:flex;gap:8px}
+  .q .qn{background:var(--navy);color:#fff;border-radius:7px;min-width:26px;height:26px;
+    display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;flex-shrink:0}
+  .opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:34px}
+  .opt{display:flex;align-items:center;gap:6px;background:#f3f7f5;border:1px solid var(--line);
+    border-radius:8px;padding:6px 11px;cursor:pointer;font-size:.88rem;transition:.12s}
+  .opt:hover{border-color:var(--gold)}
+  .opt input{accent-color:var(--navy)}
+  .mc .opt{width:100%}
+  input[type=text].ans{
+    margin-left:34px;border:1px solid #b9c6c3;border-radius:8px;padding:8px 11px;
+    font-size:.9rem;width:min(280px,90%);font-family:inherit;
+  }
+  input[type=text].ans:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(224,120,86,.18)}
+  select.ans{
+    margin-left:34px;border:1px solid #b9c6c3;border-radius:8px;padding:8px 11px;
+    font-size:.9rem;font-family:inherit;background:#fff;min-width:140px;
+  }
+  select.ans:focus{outline:none;border-color:var(--gold)}
+
+  .feedback{margin:8px 0 0 34px;font-size:.85rem;display:none;border-radius:8px;padding:8px 11px}
+  .feedback.show{display:block}
+  .feedback.ok{background:var(--green-bg);color:var(--green);border:1px solid #bfe6ce}
+  .feedback.no{background:var(--red-bg);color:var(--red);border:1px solid #f1c9c4}
+  .q.correct input.ans,.q.correct select.ans{border-color:var(--green);background:var(--green-bg)}
+  .q.wrong input.ans,.q.wrong select.ans{border-color:var(--red);background:var(--red-bg)}
+  .opt.opt-correct{background:var(--green-bg);border-color:var(--green)}
+  .opt.opt-wrong{background:var(--red-bg);border-color:var(--red)}
+
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+  .result-banner{
+    display:none;margin:6px 0 18px;border-radius:14px;padding:14px 18px;font-weight:700;
+    background:var(--navy);color:#fff;align-items:center;gap:14px;
+  }
+  .result-banner.show{display:flex}
+  .result-banner .pct{font-size:1.6rem;color:var(--gold-soft)}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:.85rem;padding:24px 16px;
+    border-top:1px solid var(--line);margin-top:10px;
+  }
+  footer .credit{color:var(--navy);font-weight:700}
+
+  .summary{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);
+    padding:22px;margin-top:8px;display:none;
+  }
+  .summary.show{display:block;animation:fade .3s ease}
+  .summary h2{color:var(--navy);margin-top:0}
+  .breakdown{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
+  .bd{flex:1 1 150px;background:#f1f6f4;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .bd .v{font-size:1.4rem;font-weight:800;color:var(--navy)}
+  .bd .k{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .note{font-size:.8rem;color:var(--muted);margin-top:10px}
+
+  @media(max-width:820px){
+    .split{flex-direction:column}
+    .passage{position:static;max-height:none}
+    .scorebar{justify-content:center}
+  }
+  canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:999}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<header>
+  <h1>IELTS Prep Reading Series - R2</h1>
+  <div class="sub">HCT Advanced English Courses · 3 Sections · 40 Questions · Interactive Practice</div>
+</header>
+
+<div class="wrap">
+
+  <div class="scorebar">
+    <div class="left">
+      <div class="stat"><div class="num" id="answered">0</div><div class="lbl">Answered</div></div>
+      <div class="stat"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="stat"><div class="num" id="totalQ">/40</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="band-chip">
+      <div class="big" id="bandNum">—</div>
+      <div class="cap">Est. Band</div>
+    </div>
+  </div>
+
+  <div class="actions" style="margin:0 0 14px">
+    <button class="btn btn-navy" onclick="saveProgress()">💾 Save Progress</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('loadFile').click()">📂 Load Progress</button>
+    <input type="file" id="loadFile" accept="application/json" style="display:none" onchange="loadProgress(this)">
+  </div>
+
+  <div class="pills" id="pills">
+    <button class="pill active" data-part="1">Part 1 <span class="done" id="d1"></span></button>
+    <button class="pill" data-part="2">Part 2 <span class="done" id="d2"></span></button>
+    <button class="pill" data-part="3">Part 3 <span class="done" id="d3"></span></button>
+    <button class="pill" data-part="4">★ Final Score</button>
+  </div>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="part active" id="part-1">
+    <div class="result-banner" id="banner1"><span>Part 1 result:</span> <span class="pct" id="pct1"></span></div>
+    <div class="split">
+      <div class="col-passage">
+        <div class="passage">
+          <p class="lead">Read the text below and answer Questions 1–7.</p>
+          <h2>Great cycling trails</h2>
+          <p>Why not take the bike and try one of these wonderful cycling routes next weekend?</p>
+          <div class="camp"><b>A&nbsp; Bo'ness to Blackness Castle, Edinburgh</b><p>If you like cycling on flat ground and enjoy having interesting things to look at, this is one of the best trails in Scotland. Among its plus points, there are fantastic views of three of the bridges across the river Forth. Simply return by the same path or continue on to South Queensferry for a longer day out.</p></div>
+          <div class="camp"><b>B&nbsp; The Montgomery Canal cycle path, Wales</b><p>Dragonflies, swans, buzzards, fish and other creatures can be spotted as you cycle alongside the canal. The path is in good condition and broad enough for a family to ride safely. A day out cycling in the area can also include a visit to the nearby thirteenth-century Powis Castle and its beautiful gardens.</p></div>
+          <div class="camp"><b>C&nbsp; A walking and cycling path in Birmingham, West Midlands</b><p>The busy city of Birmingham has several well-known bike trails, including a quiet route along the Bourn Brook to Woodgate Valley country park. One hump-backed bridge is best walked across, but the rest of the route is flat and suitable for a range of bikes. It's then 2km along the signposted path to Woodgate Valley, which is perfect for picnics, has a family-friendly visitor attraction especially known for its sheep, and offers a break from cycling.</p></div>
+          <div class="camp"><b>D&nbsp; The Cycle Trail in the Forest of Dean, Gloucestershire</b><p>The path is on a former railway route from the time when the area was involved in coal mining. Cyclists can visit sites from this period on the way, but those just along for the views won't be disappointed. Stop for lunch at one of the numerous picnic spots along the way. The route is circular, fully marked and suitable for the whole family, including the dog.</p></div>
+          <div class="camp"><b>E&nbsp; The Wirral Trail, Liverpool</b><p>The trail is safe, flat and with plenty of cafés on the way. Take in the views of North Wales, have a rest on the beach at Caldy or Thurstaston, then cross the border into Cheshire and on towards Chester. Both West Kirby and Chester have regular direct trains back to Liverpool.</p></div>
+
+          <p class="lead">Read the text below and answer Questions 8–14.</p>
+          <h2>What steps to take to become a fashion designer</h2>
+          <p>First, it's important to think about what types of fashion designers are in demand currently. There are so many womenswear designers, yet not as many menswear, sportswear or accessories designers. Opportunities might be greater in those categories.</p>
+          <p>When applying for internships, think about what you'll bring to the company as well as what they can offer you: Is the company going to teach you skills that are relevant to your future career? What mix of skills can you bring to the company that is relevant to their needs? Try to find the company that's the right fit for you, and you are much more likely to be what the company is looking for as well.</p>
+          <p>Knocking on doors can lead to fantastic opportunities: Designers are very busy and overwhelmed with people applying to work with them, but they're far more impressed by people that try that little bit harder. For example, some graduates go overseas to New York or Milan to deliver a self-directed design project and CV to the designer of their choice. Of course that can lead to considerable expense, but it often results in success.</p>
+          <p>Make use of online fashion and business networking sites. Create your profile on each one, as you never know who might be looking. Apply to as many fashion hiring agencies as you can - there are more than 20 in the UK alone. Not all of them take on new graduates, but try them all anyway.</p>
+          <p>Consider your training and fill in any gaps in it. Assistant designers and interns can make themselves more employable through investing time in obtaining, for example, computer-aided design (CAD) skills. Unfortunately, not all colleges and universities have CAD as an integral part of their courses. If this has affected you, you should study using online learning applications.</p>
+          <p>Finally, talent is not enough – you need to get out there and make sure everybody knows about your skills. Graduates should be aware that they need to be proactive and persistent. It's all down to developing new contacts and utilising the ones you already have.</p>
+        </div>
+      </div>
+
+      <div class="col-q">
+        <!-- Q1-7 -->
+        <div class="qcard">
+          <h3 class="qhead">Questions 1–7</h3>
+          <p class="qinstr">Look at the five descriptions of cycle trails, A–E. For which cycle trail are the following statements true? Choose A–E. <b>NB You may use any letter more than once.</b></p>
+          <div class="q" data-q="1"><div class="stem"><span class="qn">1</span> People who like finding out about industrial history may find this cycle trail interesting.</div>
+            <select class="ans" data-q="1"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="1"></div></div>
+          <div class="q" data-q="2"><div class="stem"><span class="qn">2</span> Cyclists might find it advisable to get off their bikes on this trail and go a short distance on foot.</div>
+            <select class="ans" data-q="2"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="2"></div></div>
+          <div class="q" data-q="3"><div class="stem"><span class="qn">3</span> It is possible to buy something to eat when cycling along this trail.</div>
+            <select class="ans" data-q="3"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="3"></div></div>
+          <div class="q" data-q="4"><div class="stem"><span class="qn">4</span> People can stop on this trail and see some farm animals.</div>
+            <select class="ans" data-q="4"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="4"></div></div>
+          <div class="q" data-q="5"><div class="stem"><span class="qn">5</span> Cyclists can stop for a while on this trail and sit by the sea.</div>
+            <select class="ans" data-q="5"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="5"></div></div>
+          <div class="q" data-q="6"><div class="stem"><span class="qn">6</span> A very old building is close to this trail and is open to the public.</div>
+            <select class="ans" data-q="6"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="6"></div></div>
+          <div class="q" data-q="7"><div class="stem"><span class="qn">7</span> Riders can extend the distance they cycle if they take this trail.</div>
+            <select class="ans" data-q="7"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="7"></div></div>
+        </div>
+
+        <!-- Q8-14 -->
+        <div class="qcard">
+          <h3 class="qhead">Questions 8–14</h3>
+          <p class="qinstr">Complete the flow-chart: <b>Design graduates – how to get work in the fashion industry.</b> Choose <b>ONE WORD ONLY</b> from the text.</p>
+          <div class="q" data-q="8"><div class="stem"><span class="qn">8</span> Consider whether to specialise in a less popular area, such as ______ rather than clothing.</div>
+            <input type="text" class="ans" data-q="8" placeholder="one word"><div class="feedback" data-fb="8"></div></div>
+          <div class="q" data-q="9"><div class="stem"><span class="qn">9</span> Try to get an internship in a business where you will be a good ______ .</div>
+            <input type="text" class="ans" data-q="9" placeholder="one word"><div class="feedback" data-fb="9"></div></div>
+          <div class="q" data-q="10"><div class="stem"><span class="qn">10</span> Hand in the application personally, even if this involves significant ______ .</div>
+            <input type="text" class="ans" data-q="10" placeholder="one word"><div class="feedback" data-fb="10"></div></div>
+          <div class="q" data-q="11"><div class="stem"><span class="qn">11</span> To get your work seen, make sure you produce a ______ on various digital platforms…</div>
+            <input type="text" class="ans" data-q="11" placeholder="one word"><div class="feedback" data-fb="11"></div></div>
+          <div class="q" data-q="12"><div class="stem"><span class="qn">12</span> …and approach specialist ______ involved in recruiting fashion designers.</div>
+            <input type="text" class="ans" data-q="12" placeholder="one word"><div class="feedback" data-fb="12"></div></div>
+          <div class="q" data-q="13"><div class="stem"><span class="qn">13</span> Review the ______ you have done and make it as comprehensive as possible.</div>
+            <input type="text" class="ans" data-q="13" placeholder="one word"><div class="feedback" data-fb="13"></div></div>
+          <div class="q" data-q="14"><div class="stem"><span class="qn">14</span> Do not rely on ability alone, and establish as many useful ______ as possible.</div>
+            <input type="text" class="ans" data-q="14" placeholder="one word"><div class="feedback" data-fb="14"></div></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-gold" onclick="checkPart(1)">Reveal Answers &amp; Score (Part 1)</button>
+          <button class="btn btn-ghost" onclick="resetPart(1)">Clear Part 1</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="part" id="part-2">
+    <div class="result-banner" id="banner2"><span>Part 2 result:</span> <span class="pct" id="pct2"></span></div>
+    <div class="split">
+      <div class="col-passage">
+        <div class="passage">
+          <p class="lead">Read the text below and answer Questions 15–21.</p>
+          <h2>Types of training in business</h2>
+          <p>The type of training provided in a business will depend on the resources available for training, the type of company, and the priority the company places on training.</p>
+          <p>Technical training is a type of training meant to teach the new employee the technological aspects of the job. For example, in a consulting business, technical training might be used so the consultant knows how to operate the system to input the number of hours that should be charged to a client. In a restaurant, the server might need to be trained on how to process customers' orders using a tablet.</p>
+          <p>In production focussed businesses, quality training involves familiarizing employees with the means of preventing, detecting, and eliminating non-quality products. In a world where quality can set your business apart from competitors, this type of training provides employees with the knowledge to recognize products that are not up to quality standards and teaches them what action to take in this scenario. This type of training can result in cost savings in production as well as provide an edge in the marketing of the product.</p>
+          <p>Skills training includes proficiencies needed to actually perform the job. For example, an administrative assistant might be trained in how to answer the phone, while a salesperson might be trained in assessment of customer needs and on how to offer the customer the necessary information to make a buying decision. A cashier needs to know not only the technology to ring something up on the till, but what to do if something has been given the wrong price.</p>
+          <p>A fourth type of training is called 'soft skills' training. Soft skills refer to personality traits and personal habits that may influence relationships with other people. Executives say there is an increasing need for people who have not only the technical skills to do a job but also the necessary soft skills, such as being good at different types of communication, including listening to colleagues and customers. In a retail or restaurant environment, essential soft skills might include how to motivate others, establish rapport and keep a conversation going. Skills such as these are used in every interaction with customers and are a key component of the customer experience.</p>
+
+          <p class="lead">Read the text below and answer Questions 22–27.</p>
+          <h2>The small business lifecycle</h2>
+          <p>From the moment you make the decision to set up a business, you're in the 'business lifecycle'. This will see you progress from idea to startup, and if successful, through to the growth and maturity phases.</p>
+          <p>Stage 1 is Initial Development. This is the very beginning of the business lifecycle. You've got your business idea and you're ready to take the plunge. But before you do this you should get as many opinions as possible from friends, family, colleagues, or any industry specialists you have access to. Ultimately, the success of your business will come down to your own abilities, the state of the market and, of course, the decisions you make about the source of finance for your startup.</p>
+          <p>Once you're satisfied that your idea is ready to go, you move on to Stage 2, which is Startup. Many believe this is the riskiest stage of the entire lifecycle, since mistakes made then can have an impact many years later. Based on the feedback from your first customers, you have to be ready to adapt your product or service. It can even get to the point where you are making so many changes to it that you start to feel a bit confused about what you're doing. Don't worry—this feeling will soon disappear as your company develops.</p>
+          <p>Stage 3 is Establishment. You should now be seeing your profits improve slowly and steadily, but you may struggle to divide the time available to you between the growing demands of your business. Employing the right people is essential, so you need to take a major part in recruitment. It is your job now to start establishing order and cohesion as you mobilize your team according to clearly defined and communicated goals.</p>
+          <p>By Stage 4, Expansion, you may see rapid growth in profits and wish to move forward. However, you need to be aware of the risks of expanding too carelessly, and should keep an eye on how far expansion might affect the quality of what you provide to your existing customers.</p>
+          <p>Stage 5 is Maturity. Here you may wish to further expand the business. Many companies in this situation bring in a new leader at this stage, to face the new challenges. Other entrepreneurs may decide that they should sell the company at this stage, and move on to a new project.</p>
+        </div>
+      </div>
+
+      <div class="col-q">
+        <!-- Q15-21 -->
+        <div class="qcard">
+          <h3 class="qhead">Questions 15–21</h3>
+          <p class="qinstr">Complete the table: <b>Types of training in business.</b> Choose <b>ONE WORD ONLY</b> from the text.</p>
+          <div class="q" data-q="15"><div class="stem"><span class="qn">15</span> Technical — Consulting: keeping a record of the ______ worked.</div>
+            <input type="text" class="ans" data-q="15" placeholder="one word"><div class="feedback" data-fb="15"></div></div>
+          <div class="q" data-q="16"><div class="stem"><span class="qn">16</span> Technical — Restaurants: dealing with computerised ______ .</div>
+            <input type="text" class="ans" data-q="16" placeholder="one word"><div class="feedback" data-fb="16"></div></div>
+          <div class="q" data-q="17"><div class="stem"><span class="qn">17</span> Quality — Lower production costs and more effective ______ .</div>
+            <input type="text" class="ans" data-q="17" placeholder="one word"><div class="feedback" data-fb="17"></div></div>
+          <div class="q" data-q="18"><div class="stem"><span class="qn">18</span> Skills — Administrative assistant: using the ______ .</div>
+            <input type="text" class="ans" data-q="18" placeholder="one word"><div class="feedback" data-fb="18"></div></div>
+          <div class="q" data-q="19"><div class="stem"><span class="qn">19</span> Skills — Sales: evaluating the ______ of clients.</div>
+            <input type="text" class="ans" data-q="19" placeholder="one word"><div class="feedback" data-fb="19"></div></div>
+          <div class="q" data-q="20"><div class="stem"><span class="qn">20</span> Skills — Cashier: using a till and dealing with an incorrect ______ .</div>
+            <input type="text" class="ans" data-q="20" placeholder="one word"><div class="feedback" data-fb="20"></div></div>
+          <div class="q" data-q="21"><div class="stem"><span class="qn">21</span> Soft skills — communication, e.g. ______ .</div>
+            <input type="text" class="ans" data-q="21" placeholder="one word"><div class="feedback" data-fb="21"></div></div>
+        </div>
+
+        <!-- Q22-27 -->
+        <div class="qcard">
+          <h3 class="qhead">Questions 22–27</h3>
+          <p class="qinstr">Complete the flow-chart: <b>The small business lifecycle.</b> Choose <b>ONE WORD ONLY</b> from the text.</p>
+          <div class="q" data-q="22"><div class="stem"><span class="qn">22</span> Stage 1 – Once you have your idea, ask for different people's ______ about it.</div>
+            <input type="text" class="ans" data-q="22" placeholder="one word"><div class="feedback" data-fb="22"></div></div>
+          <div class="q" data-q="23"><div class="stem"><span class="qn">23</span> Stage 2 – Remember that ______ at this stage can affect the future success of the business.</div>
+            <input type="text" class="ans" data-q="23" placeholder="one word"><div class="feedback" data-fb="23"></div></div>
+          <div class="q" data-q="24"><div class="stem"><span class="qn">24</span> Stage 2 – Don't worry if you are ______ by all the changes at this stage.</div>
+            <input type="text" class="ans" data-q="24" placeholder="one word"><div class="feedback" data-fb="24"></div></div>
+          <div class="q" data-q="25"><div class="stem"><span class="qn">25</span> Stage 3 – Be personally involved with ______ and build an effective team.</div>
+            <input type="text" class="ans" data-q="25" placeholder="one word"><div class="feedback" data-fb="25"></div></div>
+          <div class="q" data-q="26"><div class="stem"><span class="qn">26</span> Stage 4 – Careful planning ensures that ______ is not affected.</div>
+            <input type="text" class="ans" data-q="26" placeholder="one word"><div class="feedback" data-fb="26"></div></div>
+          <div class="q" data-q="27"><div class="stem"><span class="qn">27</span> Stage 5 – To maintain growth, the company may need a different ______ .</div>
+            <input type="text" class="ans" data-q="27" placeholder="one word"><div class="feedback" data-fb="27"></div></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-gold" onclick="checkPart(2)">Reveal Answers &amp; Score (Part 2)</button>
+          <button class="btn btn-ghost" onclick="resetPart(2)">Clear Part 2</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="part" id="part-3">
+    <div class="result-banner" id="banner3"><span>Part 3 result:</span> <span class="pct" id="pct3"></span></div>
+    <div class="split">
+      <div class="col-passage">
+        <div class="passage">
+          <p class="lead">Read the text and answer Questions 28–40.</p>
+          <h2>The nursery that took all the children's toys away</h2>
+          <p><i>Do toys stifle children's creativity? One Munich nursery decided to find out. Sarah Jewell reports.</i></p>
+          <p>Children are ready consumers, particularly of toys. Their toy chests may be bursting but they are still desperate for the latest doll or train set. Depriving children of their toys seems unkind, yet a growing number of nurseries in Germany do just this. For three months of the year they put away their toys and all that is left to play with are the tables, chairs and a few blankets.</p>
+          <p>The project is called Der Spielzeugfreie Kindergarten (the nursery without toys) and was founded by Rainer Strick and Elke Schubert, public health officers who worked with adults suffering from various forms of addiction. They were concerned about the addictive habits that start early in childhood and wanted to show that children can play happily and creatively when they are not being 'suffocated' by their toys.</p>
+          <p>One of the nurseries that has been following this project for the past two years is the Friedrich-Engels-Bogen nursery in Munich. Gisela Marti, a teacher there, says: 'In these three months we offer the children space and time to get to know themselves.' The aim is to make the children 'self-confident, able to bear conflict and frustration, able to say "yes" as well as "no" and also aware of their weaknesses and strengths'. According to Gisela Marti, the children's day is deliberately unstructured as one of the basic beliefs of the project is that children spend too much time being rushed around from one activity to another and they end up with a 'reduced space for life'. The children are encouraged to do what they want, in their own way.</p>
+          <p>A video taken of the children during the three-month toy-free period shows them on the first day staring at each other hesitantly and looking apprehensively around the big, empty classroom. One of the nursery teachers, Gudrun Huber, says: 'We left them alone, even if they were bored, because sometimes things in life are boring and you have to learn to cope.' On the second day the children are filmed playing with the chairs and blankets. They make a den by draping the blankets over the tables and weighing them down with shoes, and then they start running around the room, chatting and laughing excitedly. Gudrun Huber explains how this put them in an entirely different mood: 'Once the children realised they could do what they liked and they were in control, they really went a bit mad - they got very boisterous and excited, climbing all over the furniture.' Initially it was difficult for the staff, not just because it was unbearably noisy, but because, as Gudrun Huber says: 'It was difficult to hold back and let the children be.'</p>
+          <p>Like Gudrun Huber, Gisela Marti found it hard to re-evaluate the rules she was used to: 'They weren't allowed to do anything really dangerous, but they were allowed to jump on the chairs and tables, and that is not something they would normally be allowed to do. As a teacher you do have to have confidence in the children.' But she adds: 'Everyone has to work within their own boundaries and some teachers will allow more dangerous and active play than others.'</p>
+          <p>Gisela Marti found that once the children settled down to the new regime, they invented games: 'They loved acting and putting on a show, or pretending to be in a circus or on a train, but most importantly, all the time they were playing, they were learning to socialise.'</p>
+          <p>Two weeks before the end of the project the teachers and children had a group discussion about which toys they would like brought back. The children were happy to get their toys back, but they were also aware that they had fun without them. As one little boy in Gudrun Huber's class said: 'I like having no toys because then you can use your imagination instead.'</p>
+          <p>At the end of the project, Elke Schubert thought there were definite benefits. 'We find that children on the project concentrate better when they work, integrate better into groups and communicate better than the children who didn't take part.'</p>
+          <p>The parents were also positive about how the 'time without toys' affected their children. Some parents have even copied the nursery's example. As one father said: 'Klaus used to get out all his toys and spread them all over the room and they got in such a mess that he wasn't playing properly with any of them. So we put all the toys away in the cellar and now we only get out what he actually wants to play with and he gets much less frustrated.'</p>
+          <p>Elsa Davies is Director of the National Playing Fields Association. She says: 'The most natural and durable learning happens through play and often play which is freely chosen by the child. Teachers often underestimate the power of that learning.'</p>
+        </div>
+      </div>
+
+      <div class="col-q">
+        <!-- Q28-30 -->
+        <div class="qcard mc">
+          <h3 class="qhead">Questions 28–30</h3>
+          <p class="qinstr">Choose the correct letter, A, B, C or D.</p>
+          <div class="q" data-q="28"><div class="stem"><span class="qn">28</span> What does Gisela Marti criticise about nurseries in the third paragraph?</div>
+            <div class="opts" data-mc="28"></div><div class="feedback" data-fb="28"></div></div>
+          <div class="q" data-q="29"><div class="stem"><span class="qn">29</span> When talking about danger, Gisela Marti suggests that teachers may have to</div>
+            <div class="opts" data-mc="29"></div><div class="feedback" data-fb="29"></div></div>
+          <div class="q" data-q="30"><div class="stem"><span class="qn">30</span> How did the children feel about getting their toys back?</div>
+            <div class="opts" data-mc="30"></div><div class="feedback" data-fb="30"></div></div>
+        </div>
+
+        <!-- Q31-35 -->
+        <div class="qcard">
+          <h3 class="qhead">Questions 31–35</h3>
+          <p class="qinstr">Match each statement with the correct person, A–E.</p>
+          <div class="legend">
+            <b>A</b> Gisela Marti &nbsp;·&nbsp; <b>B</b> Gudrun Huber &nbsp;·&nbsp; <b>C</b> Elke Schubert &nbsp;·&nbsp; <b>D</b> Klaus's father &nbsp;·&nbsp; <b>E</b> Elsa Davies
+          </div>
+          <div class="q" data-q="31"><div class="stem"><span class="qn">31</span> Those children who are not part of the project have poorer social skills than those who are.</div>
+            <select class="ans" data-q="31"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="31"></div></div>
+          <div class="q" data-q="32"><div class="stem"><span class="qn">32</span> A goal of the project is to enable children to express both agreement and disagreement.</div>
+            <select class="ans" data-q="32"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="32"></div></div>
+          <div class="q" data-q="33"><div class="stem"><span class="qn">33</span> An excess of toys can lead to irritation in a child.</div>
+            <select class="ans" data-q="33"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="33"></div></div>
+          <div class="q" data-q="34"><div class="stem"><span class="qn">34</span> People working in education may fail to appreciate the importance of children deciding themselves how to fill their time.</div>
+            <select class="ans" data-q="34"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="34"></div></div>
+          <div class="q" data-q="35"><div class="stem"><span class="qn">35</span> At first, the employees at the nursery found it hard to allow the children to do whatever they wanted to do.</div>
+            <select class="ans" data-q="35"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select><div class="feedback" data-fb="35"></div></div>
+        </div>
+
+        <!-- Q36-40 -->
+        <div class="qcard">
+          <h3 class="qhead">Questions 36–40</h3>
+          <p class="qinstr">Complete the summary: <b>The 'nursery without toys' project.</b> Choose <b>ONE WORD ONLY</b> from the text.</p>
+          <div class="q" data-q="36"><div class="stem"><span class="qn">36</span> On the first day, the children did not know what to do in the ______ because it contained no toys.</div>
+            <input type="text" class="ans" data-q="36" placeholder="one word"><div class="feedback" data-fb="36"></div></div>
+          <div class="q" data-q="37"><div class="stem"><span class="qn">37</span> The next day, they used tables, blankets and ______ to build a den.</div>
+            <input type="text" class="ans" data-q="37" placeholder="one word"><div class="feedback" data-fb="37"></div></div>
+          <div class="q" data-q="38"><div class="stem"><span class="qn">38</span> Once they had adapted, they began to make up ______ and do shows.</div>
+            <input type="text" class="ans" data-q="38" placeholder="one word"><div class="feedback" data-fb="38"></div></div>
+          <div class="q" data-q="39"><div class="stem"><span class="qn">39</span> They might have imagined they were in the ______ , for example, or on a train.</div>
+            <input type="text" class="ans" data-q="39" placeholder="one word"><div class="feedback" data-fb="39"></div></div>
+          <div class="q" data-q="40"><div class="stem"><span class="qn">40</span> All these activities taught them how to ______ .</div>
+            <input type="text" class="ans" data-q="40" placeholder="one word"><div class="feedback" data-fb="40"></div></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-gold" onclick="checkPart(3)">Reveal Answers &amp; Score (Part 3)</button>
+          <button class="btn btn-ghost" onclick="resetPart(3)">Clear Part 3</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL ============ -->
+  <section class="part" id="part-4">
+    <div class="summary show">
+      <h2>Your Overall Result</h2>
+      <p style="color:var(--muted);margin-top:-6px">Click below to score every section at once and estimate your IELTS General Training Reading band.</p>
+      <div class="actions">
+        <button class="btn btn-navy" onclick="checkAll()">Score Whole Test &amp; Estimate Band</button>
+        <button class="btn btn-ghost" onclick="resetAll()">Reset Entire Test</button>
+      </div>
+      <div class="breakdown">
+        <div class="bd"><div class="v" id="sumCorrect">0 / 40</div><div class="k">Correct answers</div></div>
+        <div class="bd"><div class="v" id="sumP1">– / 14</div><div class="k">Part 1</div></div>
+        <div class="bd"><div class="v" id="sumP2">– / 13</div><div class="k">Part 2</div></div>
+        <div class="bd"><div class="v" id="sumP3">– / 13</div><div class="k">Part 3</div></div>
+        <div class="bd" style="background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff">
+          <div class="v" id="sumBand" style="color:#fff">—</div><div class="k" style="color:#fff">Estimated Band</div></div>
+      </div>
+      <div id="bandMsg" style="font-size:1rem;font-weight:600;color:var(--navy)"></div>
+      <p class="note">⚠️ Band scores are <b>approximate</b>. They are based on the standard IELTS General Training Reading conversion table (which is easier than the Academic table) and can vary slightly between official tests. Use this as a guide, not an official result.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="credit">Designed by: Nazila Motahari</div>
+    <div>IELTS Prep Reading Series · R2 · HCT Advanced English Courses. For classroom use.</div>
+  </footer>
+</div>
+
+<script>
+const KEY = {
+  1:{t:'sel',a:'D',e:"The Forest of Dean trail follows a former railway from the area's coal-mining past (industrial history)."},
+  2:{t:'sel',a:'C',e:"In Birmingham, one hump-backed bridge is best walked across."},
+  3:{t:'sel',a:'E',e:"The Wirral Trail has plenty of cafés on the way."},
+  4:{t:'sel',a:'C',e:"Woodgate Valley has a visitor attraction especially known for its sheep."},
+  5:{t:'sel',a:'E',e:"On the Wirral Trail you can rest on the beach at Caldy or Thurstaston."},
+  6:{t:'sel',a:'B',e:"Near the Montgomery Canal path is the 13th-century Powis Castle, open to visitors."},
+  7:{t:'sel',a:'A',e:"The Bo'ness trail can be extended by continuing on to South Queensferry."},
+  8:{t:'txt',a:['accessories'],e:"Fewer designers work in menswear, sportswear or accessories."},
+  9:{t:'txt',a:['fit'],e:"Find the company that's the right fit for you."},
+  10:{t:'txt',a:['expense'],e:"Delivering work in person can lead to considerable expense."},
+  11:{t:'txt',a:['profile'],e:"Create your profile on networking sites."},
+  12:{t:'txt',a:['agencies'],e:"Apply to as many fashion hiring agencies as you can."},
+  13:{t:'txt',a:['training'],e:"Consider your training and fill in any gaps in it."},
+  14:{t:'txt',a:['contacts'],e:"It's all about developing new contacts."},
+  15:{t:'txt',a:['hours'],e:"Consultants input the number of hours charged to a client."},
+  16:{t:'txt',a:['orders'],e:"Restaurant servers process customers' orders on a tablet."},
+  17:{t:'txt',a:['marketing'],e:"Quality training gives an edge in the marketing of the product."},
+  18:{t:'txt',a:['phone'],e:"An administrative assistant is trained to answer the phone."},
+  19:{t:'txt',a:['needs'],e:"Salespeople assess customer needs."},
+  20:{t:'txt',a:['price'],e:"A cashier deals with something given the wrong price."},
+  21:{t:'txt',a:['listening'],e:"Soft communication skills include listening to colleagues and customers."},
+  22:{t:'txt',a:['opinions'],e:"Get as many opinions as possible from others first."},
+  23:{t:'txt',a:['mistakes'],e:"Mistakes at startup can have an impact many years later."},
+  24:{t:'txt',a:['confused'],e:"You may feel a bit confused by all the changes."},
+  25:{t:'txt',a:['recruitment'],e:"At Establishment, take a major part in recruitment."},
+  26:{t:'txt',a:['quality'],e:"Watch that expansion doesn't affect the quality you provide."},
+  27:{t:'txt',a:['leader'],e:"Many companies bring in a new leader at maturity."},
+  28:{t:'mc4',a:'D',e:"Marti criticises children being rushed from activity to activity — too much organisation."},
+  29:{t:'mc4',a:'B',e:"Teachers must work within their own boundaries — adjusting their response to danger."},
+  30:{t:'mc4',a:'D',e:"Children were happy to get toys back but also aware they had fun without them (mixed feelings)."},
+  31:{t:'sel',a:'C',e:"Elke Schubert: non-participating children integrate and communicate less well."},
+  32:{t:'sel',a:'A',e:"Gisela Marti's aim: children able to say 'yes' as well as 'no'."},
+  33:{t:'sel',a:'D',e:"Klaus's father: too many toys left his son much more frustrated."},
+  34:{t:'sel',a:'E',e:"Elsa Davies: teachers underestimate the power of freely chosen play."},
+  35:{t:'sel',a:'B',e:"Gudrun Huber: it was difficult to hold back and let the children be."},
+  36:{t:'txt',a:['classroom'],e:"On day one the children looked around the big, empty classroom."},
+  37:{t:'txt',a:['shoes'],e:"They weighed the blankets down with shoes to make a den."},
+  38:{t:'txt',a:['games'],e:"Once settled, the children invented games."},
+  39:{t:'txt',a:['circus'],e:"They pretended to be in a circus."},
+  40:{t:'txt',a:['socialise','socialize'],e:"All the play taught them to socialise."}
+};
+
+const MC = {
+  28:['the length of time children spend there','the number of arguments children have there','the lack of physical space for children\'s play there','the amount of organisation children are exposed to there'],
+  29:['learn how to reduce it','adjust their response to it','explore what causes it','agree when to avoid it'],
+  30:['They were impatient to get them back','They had not expected to get them back','They had lost interest in getting them back','They had mixed feelings about getting them back']
+};
+
+function buildMC(){
+  document.querySelectorAll('[data-mc]').forEach(box=>{
+    const q=box.getAttribute('data-mc');const letters=['A','B','C','D'];
+    MC[q].forEach((txt,i)=>{
+      const lab=document.createElement('label');lab.className='opt';
+      lab.innerHTML=`<input type="radio" name="q${q}" value="${letters[i]}"> <b style="color:var(--navy)">${letters[i]}</b>&nbsp;${txt}`;
+      box.appendChild(lab);
+    });
+  });
+}
+buildMC();
+
+const PARTS={1:range(1,14),2:range(15,27),3:range(28,40)};
+function range(a,b){let r=[];for(let i=a;i<=b;i++)r.push(i);return r;}
+
+document.querySelectorAll('.pill').forEach(p=>{
+  p.addEventListener('click',()=>{
+    const n=p.getAttribute('data-part');
+    document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    document.querySelectorAll('.part').forEach(s=>s.classList.remove('active'));
+    document.getElementById('part-'+n).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+function getAns(q){
+  const k=KEY[q];
+  if(k.t==='txt'||k.t==='sel'){const el=document.querySelector(`[data-q="${q}"]`);return el?el.value:'';}
+  const r=document.querySelector(`input[name="q${q}"]:checked`);return r?r.value:'';
+}
+function isCorrect(q){
+  const k=KEY[q];const given=getAns(q);
+  if(!given)return null;
+  if(k.t==='txt'){const norm=given.trim().toLowerCase().replace(/[.,]$/,'');return k.a.includes(norm);}
+  return given===k.a;
+}
+
+function updateLive(){
+  let answered=0,correct=0;
+  for(let q=1;q<=40;q++){const c=isCorrect(q);if(getAns(q))answered++;if(c===true)correct++;}
+  document.getElementById('answered').textContent=answered;
+  document.getElementById('correctCount').textContent=correct;
+}
+document.addEventListener('input',updateLive);
+document.addEventListener('change',updateLive);
+
+function checkPart(part){
+  let correct=0;const qs=PARTS[part];
+  qs.forEach(q=>{
+    const k=KEY[q];const c=isCorrect(q);
+    const qEl=document.querySelector(`.q[data-q="${q}"]`);
+    const fb=document.querySelector(`[data-fb="${q}"]`);
+    qEl.classList.remove('correct','wrong');
+    fb.classList.remove('show','ok','no');
+    qEl.querySelectorAll('.opt').forEach(o=>o.classList.remove('opt-correct','opt-wrong'));
+    if(c===true){
+      correct++;qEl.classList.add('correct');
+      fb.classList.add('show','ok');fb.innerHTML='✓ Correct — '+k.e;
+      highlightOpt(qEl,k.a,true);
+    }else{
+      qEl.classList.add('wrong');
+      fb.classList.add('show','no');
+      const yours=getAns(q)?`Your answer: <b>${getAns(q)}</b>. `:'<i>Not answered.</i> ';
+      const ca=Array.isArray(k.a)?k.a[0]:k.a;
+      fb.innerHTML='✗ '+yours+'Correct answer: <b>'+ca+'</b> — '+k.e;
+      highlightOpt(qEl,getAns(q),false);
+      highlightOpt(qEl,k.a,true);
+    }
+  });
+  const total=qs.length;
+  document.getElementById('pct'+part).innerHTML=`${correct} / ${total} correct`;
+  document.getElementById('banner'+part).classList.add('show');
+  document.getElementById('d'+part).textContent=`${correct}/${total}`;
+  updateLive();
+}
+function highlightOpt(qEl,val,good){
+  if(!val)return;
+  qEl.querySelectorAll('.opt').forEach(o=>{
+    const inp=o.querySelector('input');
+    if(inp&&inp.value===val)o.classList.add(good?'opt-correct':'opt-wrong');
+  });
+}
+
+function resetPart(part){
+  PARTS[part].forEach(q=>{
+    const k=KEY[q];
+    if(k.t==='txt'||k.t==='sel'){const el=document.querySelector(`[data-q="${q}"]`);if(el)el.value='';}
+    document.querySelectorAll(`input[name="q${q}"]`).forEach(r=>r.checked=false);
+    const qEl=document.querySelector(`.q[data-q="${q}"]`);qEl.classList.remove('correct','wrong');
+    qEl.querySelectorAll('.opt').forEach(o=>o.classList.remove('opt-correct','opt-wrong'));
+    const fb=document.querySelector(`[data-fb="${q}"]`);fb.classList.remove('show','ok','no');fb.innerHTML='';
+  });
+  document.getElementById('banner'+part).classList.remove('show');
+  document.getElementById('d'+part).textContent='';
+  updateLive();
+}
+
+function gtBand(raw){
+  if(raw>=39)return 9.0;
+  if(raw===38)return 8.5;
+  if(raw>=36)return 8.0;
+  if(raw>=34)return 7.5;
+  if(raw>=32)return 7.0;
+  if(raw>=30)return 6.5;
+  if(raw>=27)return 6.0;
+  if(raw>=23)return 5.5;
+  if(raw>=19)return 5.0;
+  if(raw>=15)return 4.5;
+  if(raw>=13)return 4.0;
+  if(raw>=10)return 3.5;
+  return 3.0;
+}
+
+function checkAll(){
+  checkPart(1);checkPart(2);checkPart(3);
+  let p1=count(1),p2=count(2),p3=count(3);
+  let total=p1+p2+p3;
+  let band=gtBand(total);
+  document.getElementById('sumCorrect').textContent=total+' / 40';
+  document.getElementById('sumP1').textContent=p1+' / 14';
+  document.getElementById('sumP2').textContent=p2+' / 13';
+  document.getElementById('sumP3').textContent=p3+' / 13';
+  document.getElementById('sumBand').textContent=band.toFixed(1);
+  document.getElementById('bandNum').textContent=band.toFixed(1);
+  let msg='';
+  if(band>=7)msg='🌟 Excellent! That is a strong, university-ready reading score.';
+  else if(band>=6)msg='✅ Good work — Band 6 is the common entry requirement for many programs. Keep pushing!';
+  else if(band>=5)msg='👍 Solid progress. Focus on matching and one-word completion accuracy to climb higher.';
+  else msg='💪 Keep practising — review the explanations carefully and re-read the passages to spot the answers.';
+  document.getElementById('bandMsg').textContent=msg;
+  if(band>=6)confetti();
+}
+function count(part){let c=0;PARTS[part].forEach(q=>{if(isCorrect(q)===true)c++;});return c;}
+
+function resetAll(){resetPart(1);resetPart(2);resetPart(3);
+  document.getElementById('sumCorrect').textContent='0 / 40';
+  document.getElementById('sumP1').textContent='– / 14';
+  document.getElementById('sumP2').textContent='– / 13';
+  document.getElementById('sumP3').textContent='– / 13';
+  document.getElementById('sumBand').textContent='—';
+  document.getElementById('bandNum').textContent='—';
+  document.getElementById('bandMsg').textContent='';
+}
+
+/* ---------- Save / Load progress (JSON) ---------- */
+function saveProgress(){
+  const data={app:'IELTS Prep Reading Series - R2',saved:new Date().toISOString(),answers:{}};
+  for(let q=1;q<=40;q++){data.answers[q]=getAns(q);}
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='IELTS-Reading-R2-progress.json';
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+function loadProgress(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      const ans=data.answers||{};
+      resetAll();
+      for(let q=1;q<=40;q++){
+        const v=ans[q];if(v===undefined||v==='')continue;
+        const k=KEY[q];
+        if(k.t==='txt'||k.t==='sel'){const el=document.querySelector(`[data-q="${q}"]`);if(el)el.value=v;}
+        else{const r=document.querySelector(`input[name="q${q}"][value="${v}"]`);if(r)r.checked=true;}
+      }
+      updateLive();
+      alert('✅ Progress loaded successfully! Your saved answers have been restored.');
+    }catch(err){
+      alert('⚠️ Could not read this file. Please choose a valid saved-progress file (.json).');
+    }
+    input.value='';
+  };
+  reader.readAsText(file);
+}
+
+function confetti(){
+  const c=document.getElementById('confetti');const ctx=c.getContext('2d');
+  c.width=innerWidth;c.height=innerHeight;
+  const cols=['#e07856','#0f5257','#1f8a55','#f3c9b8','#15727a'];
+  let bits=[];for(let i=0;i<140;i++)bits.push({x:Math.random()*c.width,y:-20-Math.random()*c.height,
+    s:6+Math.random()*8,vy:2+Math.random()*4,vx:-2+Math.random()*4,col:cols[i%cols.length],rot:Math.random()*6});
+  let t=0;
+  (function loop(){
+    ctx.clearRect(0,0,c.width,c.height);
+    bits.forEach(b=>{b.y+=b.vy;b.x+=b.vx;b.rot+=.1;
+      ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.rot);ctx.fillStyle=b.col;
+      ctx.fillRect(-b.s/2,-b.s/2,b.s,b.s*.6);ctx.restore();});
+    t++;if(t<160)requestAnimationFrame(loop);else ctx.clearRect(0,0,c.width,c.height);
+  })();
+}
+</script>
+</body>
+</html>
